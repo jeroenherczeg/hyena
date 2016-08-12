@@ -16,3 +16,10 @@ Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recen
 ## Security
 
 If you discover any security related issues, please email jeroen@herczeg.be instead of using the issue tracker.
+
+## About Jeroen Herczeg
+Hello. I can help you or your team with my broad knowledge of frontend & backend web technologies and tools. I'm an eager learner and easily adapt to new environments. Work remotely? I like that. Need me on location? I'm sure we'll figure something out! jeroen@herczeg.be
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
