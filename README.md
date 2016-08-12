@@ -8,6 +8,9 @@ This package can be installed via Composer:
 composer require jeroenherczeg/hyena
 ```
 
+## Usage
+
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
