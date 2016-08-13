@@ -11,17 +11,17 @@ composer require jeroenherczeg/hyena
 ## Usage
 
 ```php
-$result = Hyena::visit('google.be')->extract(['name', 'images']);
+$result = Hyena::visit('https://github.com/jeroenherczeg/hyena')->extract(['name', 'url', 'images']);
 ```
 
 ```php
 [
-  'name' => 'Google',
+  'name' => 'Github',
+  'url' => 'https://github.com'
   'images' => [
-    'https://www.google.be/images/nav_logo242_hr.png',
-    'http://ssl.gstatic.com/gb/images/p1_a4541be8.png',
-    'https://www.google.be/logos/doodles/2016/2016-doodle-fruit-games-day-9-5664146415681536-res.png',
-    'https://www.google.be/logos/doodles/2016/2016-doodle-fruit-games-day-9-5664146415681536-hp.gif',
+    'https://avatars1.githubusercontent.com/u/759412?v=3&s=40',
+    'https://assets-cdn.github.com/images/spinners/octocat-spinner-128.gif',
+    'https://assets-cdn.github.com/images/spinners/octocat-spinner-32.gif'
   ]
 ]
 ```
