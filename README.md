@@ -11,7 +11,20 @@ composer require jeroenherczeg/hyena
 ## Usage
 
 ```php
-$result = Hyena::visit('google.be')->extract(['name', 'colors', 'images']);
+$result = Hyena::visit('google.be')->extract(['name', 'images']);
+```
+
+```php
+[
+  [
+    'name' => 'Google',
+    'images' => [
+      'https://www.google.be/images/nav_logo242_hr.png',
+      'http://ssl.gstatic.com/gb/images/p1_a4541be8.png',
+      'https://www.google.be/logos/doodles/2016/2016-doodle-fruit-games-day-9-5664146415681536-res.png',
+      'https://www.google.be/logos/doodles/2016/2016-doodle-fruit-games-day-9-5664146415681536-hp.gif',
+    ]
+]
 ```
 
 ## Changelog
