@@ -10,6 +10,9 @@ composer require jeroenherczeg/hyena
 
 ## Usage
 
+```php
+$result = Hyena::visit('google.be')->extract(['name', 'colors', 'images']);
+```
 
 ## Changelog
 
