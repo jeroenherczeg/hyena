@@ -1,4 +1,4 @@
-# An Artificial Intelligence Web Scraper for Laravel 5
+# An Intelligent Web Scraper for Laravel 5
 
 ## Installation
 
