@@ -1,8 +1,22 @@
 # Changelog
 
-All Notable changes to `jeroenherczeg/hyena` will be documented in this file.
+All Notable changes to `hyena` will be documented in this file.
 
+Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## NEXT - YYYY-MM-DD
 
-## 0.0.0 - 2016-08-13
-- Hello world
+### Added
+- Nothing
+
+### Deprecated
+- Nothing
+
+### Fixed
+- Nothing
+
+### Removed
+- Nothing
+
+### Security
+- Nothing
