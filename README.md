@@ -11,13 +11,12 @@ composer require jeroenherczeg/hyena
 ## Usage
 
 ```php
-$result = Hyena::visit('https://github.com/jeroenherczeg/hyena')->extract(['name', 'url', 'images']);
+$result = Hyena::visit('https://github.com')->extract(['name', 'images']);
 ```
 
 ```php
 [
   'name' => 'Github',
-  'url' => 'https://github.com'
   'images' => [
     'https://avatars1.githubusercontent.com/u/759412?v=3&s=40',
     'https://assets-cdn.github.com/images/spinners/octocat-spinner-128.gif',
