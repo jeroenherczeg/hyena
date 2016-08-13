@@ -1,4 +1,4 @@
-# hyena
+# A Web Scraper for Laravel 5
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
@@ -21,8 +21,18 @@ $ composer require jeroenherczeg/hyena
 ## Usage
 
 ``` php
-$skeleton = new League\Skeleton();
-echo $skeleton->echoPhrase('Hello, League!');
+$result = Hyena::visit('https://github.com')->extract(['name', 'images']);
+```
+
+``` php
+[
+  'name' => 'Github',
+  'images' => [
+    'https://avatars1.githubusercontent.com/u/759412?v=3&s=40',
+    'https://assets-cdn.github.com/images/spinners/octocat-spinner-128.gif',
+    'https://assets-cdn.github.com/images/spinners/octocat-spinner-32.gif'
+  ]
+]
 ```
 
 ## Change log
