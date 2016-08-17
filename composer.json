@@ -1,49 +1,53 @@
 {
-    "name": "jeroenherczeg/hyena",
-    "type": "library",
-    "description": "A Web Scraper for Laravel 5",
-    "keywords": [
-        "jeroenherczeg",
-        "hyena"
-    ],
-    "homepage": "https://github.com/jeroenherczeg/hyena",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Jeroen Herczeg",
-            "email": "jeroen@herczeg.be",
-            "homepage": "https://herczeg.be",
-            "role": "Developer"
-        }
-    ],
-    "require": {
-        "php" : "~5.6|~7.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit" : "~4.0||~5.0",
-        "scrutinizer/ocular": "~1.1",
-        "squizlabs/php_codesniffer": "~2.3"
-    },
-    "autoload": {
-        "psr-4": {
-            "jeroenherczeg\\hyena\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "jeroenherczeg\\hyena\\": "tests"
-        }
-    },
-    "scripts": {
-        "test": "phpunit",
-        "format": "phpcbf --standard=psr2 src/"
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0-dev"
-        }
-    },
-    "config": {
-        "sort-packages": true
+  "name": "jeroenherczeg/hyena",
+  "type": "library",
+  "description": "A Web Scraper for Laravel 5",
+  "keywords": [
+    "jeroenherczeg",
+    "hyena"
+  ],
+  "homepage": "https://github.com/jeroenherczeg/hyena",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Jeroen Herczeg",
+      "email": "jeroen@herczeg.be",
+      "homepage": "https://herczeg.be",
+      "role": "Developer"
     }
+  ],
+  "require": {
+    "php": "~5.6|~7.0",
+    "guzzlehttp/guzzle": "^6.2",
+    "symfony/css-selector": "^3.1",
+    "symfony/dom-crawler": "^3.1",
+    "ext-imagick": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.0||~5.0",
+    "scrutinizer/ocular": "~1.1",
+    "squizlabs/php_codesniffer": "~2.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Jeroenherczeg\\Hyena\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Jeroenherczeg\\Hyena\\Test\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "phpunit",
+    "format": "phpcbf --standard=psr2 src/"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  }
 }
