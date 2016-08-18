@@ -1309,7 +1309,10 @@ foreach ($domains as $domain) {
     try {
         $visit = $hyena->visit($domain['domain']);
         if ($visit != null) {
-            $result = $visit->extract(['name', 'images']);
+            $result = $visit->extract(['name', 'images'], [
+                'min_image_height' => 300,
+                'min_image_width'  => 300,
+            ]);
             $color = is_null($domain['good']) ? '#f2e785' : ($domain['good'] === true ? '#4caf50' : '#f44336');
         } else {
             $error = 'Can\'t get domain data';
@@ -1322,7 +1325,9 @@ foreach ($domains as $domain) {
     echo $error . "\n";
     fwrite($f, sprintf("<td style='background: %1\$s'><a href='%2\$s' target='_blank'>%2\$s</a></td>", $color, $domain['domain']));
     fwrite($f, sprintf("<td style='background: %s'>%s</td>", $color, $result ? $result['name'] : ''));
-    fwrite($f, sprintf("<td style='background: %s'>%s</td>", $color, $result ? implode('<br>', $result['images']) : ''));
+    fwrite($f, sprintf("<td style='background: %s'>%s</td>", $color, $result ? implode('<br>', array_map(function ($link) {
+        return sprintf('<a href=\'%1$s\' target=\'_blank\'>%1$s</a>', $link);
+    }, $result['images'])) : ''));
     fwrite($f, sprintf("<td style='background: %s'>%s</td>", $color, htmlentities($error)));
     fwrite($f, "</tr>");
 }

@@ -39,8 +39,14 @@ class HyenaImageFinder
         $images = [];
         $imageNodes = $this->crawler->filter('img');
         foreach ($imageNodes as $content) {
+            if (count($images) > $options['limit_images']) {
+                return $images;
+            }
             $imageNode = new Crawler($content);
             $src = $imageNode->attr('src');
+            if (!$src) {
+                continue;
+            }
             if (strpos($src, 'http') !== 0) {
                 $src = trim($this->uri, '/') . '/' . trim($src, '/');
                 $src = strtolower($src);

@@ -22,6 +22,7 @@ class HyenaResponse
         'min_image_width'    => 50,
         'min_image_height'   => 50,
         'min_image_filesize' => 16,
+        'limit_images'       => 10
     ];
     private $currentOptions = [];
 
