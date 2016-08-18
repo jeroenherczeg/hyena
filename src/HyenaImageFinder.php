@@ -37,6 +37,20 @@ class HyenaImageFinder
     public function getImages(array $options)
     {
         $images = [];
+        $imageNodes = $this->crawler->filter('[property="og:image"]');
+        foreach ($imageNodes as $content) {
+            if (count($images) > $options['limit_images']) {
+                return $images;
+            }
+            $imageNode = new Crawler($content);
+            $src = $imageNode->attr('content');
+            if (!$src) {
+                continue;
+            }
+            if ($this->checkImage($src, $options)) {
+                $images[] = $src;
+            }
+        }
         $imageNodes = $this->crawler->filter('img');
         foreach ($imageNodes as $content) {
             if (count($images) > $options['limit_images']) {
@@ -47,27 +61,36 @@ class HyenaImageFinder
             if (!$src) {
                 continue;
             }
-            if (strpos($src, 'http') !== 0) {
-                $src = trim($this->uri, '/') . '/' . trim($src, '/');
-                $src = strtolower($src);
+            if ($this->checkImage($src, $options)) {
+                $images[] = $src;
             }
-            $image = new \Imagick();
-            try {
-                $image->pingImage($src);
-                if (
-                    $image->getImageWidth() < $options['min_image_width'] ||
-                    $image->getImageHeight() < $options['min_image_height'] ||
-                    $image->getImageSize() < $options['min_image_filesize']
-                ) {
-                    continue;
-                }
-            } catch (\Exception $e) {
-                echo $e->getMessage() . "\n";
-                continue;
-            }
-            $images[] = $src;
         }
 
         return $images;
+    }
+
+    private function checkImage($src, $options)
+    {
+        if (strpos($src, 'http') !== 0) {
+            $src = trim($this->uri, '/') . '/' . trim($src, '/');
+            $src = strtolower($src);
+        }
+        $image = new \Imagick();
+        try {
+            $image->pingImage($src);
+            if (
+                $image->getImageWidth() < $options['min_image_width'] ||
+                $image->getImageHeight() < $options['min_image_height'] ||
+                $image->getImageSize() < $options['min_image_filesize']
+            ) {
+                return false;
+            }
+        } catch (\Exception $e) {
+            echo $e->getMessage() . "\n";
+
+            return false;
+        }
+
+        return true;
     }
 }

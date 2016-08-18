@@ -1299,7 +1299,7 @@ $domains = [
     ['domain' => 'http://zweuds.be', 'good' => true],
 ];
 set_time_limit(0);
-$f = fopen('test.html', 'w');
+$f = fopen('test_full.html', 'w');
 fwrite($f, "<!DOCTYPE html><html><head><title></title><style>td {padding:5px;}</style></head><body><table>");
 foreach ($domains as $domain) {
     echo $domain['domain'] . " - " . $domain['good'] . "\n";
