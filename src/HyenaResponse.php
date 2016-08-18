@@ -18,8 +18,6 @@ class HyenaResponse
     private $uri;
     /** @var array */
     private $availableFields = ['name', 'images'];
-    private $names = [];
-    private $namesString = '';
     private $defaultOptions = [
         'min_image_width'    => 50,
         'min_image_height'   => 50,
@@ -41,9 +39,12 @@ class HyenaResponse
     }
 
     /**
+     * Try to extract requested data from given uri
+     *
      * @param array $fields
      * @param array $options
      * @return array
+     * @throws HyenaParamsExtension
      */
     public function extract(array $fields, array $options = [])
     {
@@ -51,10 +52,10 @@ class HyenaResponse
         $this->currentOptions = array_merge($this->defaultOptions, $options);
         foreach ($fields as $field) {
             if (!is_string($field)) {
-                // TODO: throw error
+                throw new HyenaParamsExtension('Field name should be a string. ' . gettype($field) . ' is given.');
             }
             if (!in_array($field, $this->availableFields)) {
-                // TODO: throw error
+                throw new HyenaParamsExtension('Field "' . $field . '" not available for request. Available fields: ' . implode(', ', $this->availableFields));
             }
             $result[$field] = $this->getFieldFromResponse($field);
         }
@@ -62,6 +63,12 @@ class HyenaResponse
         return $result;
     }
 
+    /**
+     * Return value for requested field
+     *
+     * @param string $field
+     * @return array|null|string
+     */
     private function getFieldFromResponse($field)
     {
         switch ($field) {
@@ -76,37 +83,23 @@ class HyenaResponse
         }
     }
 
+    /**
+     * Collect and return images matching options
+     *
+     * @return array
+     */
     private function getSiteImages()
     {
-        $images = [];
-        $imageNodes = $this->crawler->filter('img');
-        foreach ($imageNodes as $content) {
-            $imageNode = new Crawler($content);
-            $src = $imageNode->attr('src');
-            if (strpos($src, 'http') !== 0) {
-                $src = trim($this->uri, '/') . '/' . trim($src, '/');
-                echo "src: " . $src . "\n";
-            }
-            $image = new \Imagick();
-            try {
-                $image->pingImage($src);
-                if (
-                    $image->getImageWidth() < $this->currentOptions['min_image_width'] ||
-                    $image->getImageHeight() < $this->currentOptions['min_image_height'] ||
-                    $image->getImageSize() < $this->currentOptions['min_image_filesize']
-                ) {
-                    continue;
-                }
-            } catch (Exception $e) {
-                echo $e->getMessage() . "\n";
-                continue;
-            }
-            $images[] = $src;
-        }
+        $nameFinder = new HyenaImageFinder($this->crawler, $this->uri);
 
-        return $images;
+        return $nameFinder->getImages($this->currentOptions);
     }
 
+    /**
+     * Find and return name of website
+     *
+     * @return string
+     */
     private function getSiteName()
     {
         $nameFinder = new HyenaNameFinder($this->crawler, $this->uri);
