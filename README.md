@@ -18,10 +18,36 @@ Via Composer
 $ composer require jeroenherczeg/hyena
 ```
 
+Next, you must install the service provider:
+
+``` php
+// config/app.php
+'providers' => [
+    ...
+    Jeroenherczeg\Hyena\HyenaServiceProvider::class,
+];
+```
+
+And add facade:
+
+``` php
+// config/app.php
+'aliases' => [
+    ...
+    Jeroenherczeg\Hyena\Facades\Hyena::class,
+];
+```
+
 ## Usage
 
 ``` php
 $result = Hyena::visit('https://github.com')->extract(['name', 'images']);
+$result = Hyena::visit('https://github.com')->extract(['name', 'images'], [
+    'min_image_width'    => 50, // optional, minimal width of picture in px
+    'min_image_height'   => 50, // optional, minimal height of picture in px
+    'min_image_filesize' => 16000, // optional, minimal filesize of picture in bytes
+    'limit_images'       => 10  // optional, max count of images to return
+]);
 ```
 
 ``` php
