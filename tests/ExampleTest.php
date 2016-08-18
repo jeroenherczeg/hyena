@@ -3,12 +3,28 @@ namespace League\Skeleton;
 
 use Jeroenherczeg\Hyena\Hyena;
 use Illuminate\Foundation\Testing\TestCase;
+use Jeroenherczeg\Hyena\HyenaParamsException;
 
 class ExampleTest extends TestCase
 {
     /**
-     * Test that true does in fact equal true
+     * @expectedException HyenaParamsException
      */
+    public function testWrongFieldException()
+    {
+        $hyena = new Hyena();
+        $hyena->visit('http://github.com')->extract([['field as array']]);
+    }
+
+    /**
+     * @expectedException HyenaParamsException
+     */
+    public function testWrongFieldNameException()
+    {
+        $hyena = new Hyena();
+        $hyena->visit('http://github.com')->extract(['wrong_field_name']);
+    }
+
     public function testSiteNames()
     {
         $names = [

@@ -45,7 +45,7 @@ class HyenaResponse
      * @param array $fields
      * @param array $options
      * @return array
-     * @throws HyenaParamsExtension
+     * @throws HyenaParamsException
      */
     public function extract(array $fields, array $options = [])
     {
@@ -53,10 +53,10 @@ class HyenaResponse
         $this->currentOptions = array_merge($this->defaultOptions, $options);
         foreach ($fields as $field) {
             if (!is_string($field)) {
-                throw new HyenaParamsExtension('Field name should be a string. ' . gettype($field) . ' is given.');
+                throw new HyenaParamsException('Field name should be a string. ' . gettype($field) . ' is given.');
             }
             if (!in_array($field, $this->availableFields)) {
-                throw new HyenaParamsExtension('Field "' . $field . '" not available for request. Available fields: ' . implode(', ', $this->availableFields));
+                throw new HyenaParamsException('Field "' . $field . '" not available for request. Available fields: ' . implode(', ', $this->availableFields));
             }
             $result[$field] = $this->getFieldFromResponse($field);
         }
