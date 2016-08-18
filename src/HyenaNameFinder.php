@@ -65,7 +65,7 @@ class HyenaNameFinder
     {
         $name = str_replace('-', ' ', str_slug($name));
         if (!isset($this->names[$name])) {
-            $this->names[$name] = ['count' => 0, 'name' => mb_strtolower($name)];
+            $this->names[$name] = ['count' => 0, 'name' => strtolower($name)];
         }
         $this->names[$name]['count']++;
     }
