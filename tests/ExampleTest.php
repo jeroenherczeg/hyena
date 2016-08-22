@@ -1,14 +1,42 @@
 <?php
-
 namespace League\Skeleton;
 
-class ExampleTest extends \PHPUnit_Framework_TestCase
+use Jeroenherczeg\Hyena\Hyena;
+use Illuminate\Foundation\Testing\TestCase;
+use Jeroenherczeg\Hyena\HyenaParamsException;
+
+class ExampleTest extends TestCase
 {
     /**
-     * Test that true does in fact equal true
+     * @expectedException HyenaParamsException
      */
-    public function testTrueIsTrue()
+    public function testWrongFieldException()
     {
-        $this->assertTrue(true);
+        $hyena = new Hyena();
+        $hyena->visit('http://github.com')->extract([['field as array']]);
+    }
+
+    /**
+     * @expectedException HyenaParamsException
+     */
+    public function testWrongFieldNameException()
+    {
+        $hyena = new Hyena();
+        $hyena->visit('http://github.com')->extract(['wrong_field_name']);
+    }
+
+    public function testSiteNames()
+    {
+        $names = [
+            'http://aliexpress.com'            => 'Aliexpress',
+            'http://bobotremelo.be'            => 'Bobo Tremelo',
+            'http://comptoirdescotonniers.com' => 'Comptoir Des Cotonniers',
+            'http://mettepernille.nl'          => 'Mette Pernille'
+        ];
+        $hyena = new Hyena();
+        foreach ($names as $domain => $name) {
+            $result = $hyena->visit($domain)->extract(['name']);
+            $this->assertTrue($result['name'] === $name);
+        }
     }
 }
