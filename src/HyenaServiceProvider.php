@@ -1,5 +1,5 @@
 <?php
-namespace App\Providers;
+namespace Jeroenherczeg\Hyena;
 
 use Illuminate\Support\ServiceProvider;
 use Jeroenherczeg\Hyena\Hyena;

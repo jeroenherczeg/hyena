@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: artycake
- * Date: 8/15/16
- * Time: 15:37
- */
+
 namespace Jeroenherczeg\Hyena;
 
 use Psr\Http\Message\ResponseInterface;

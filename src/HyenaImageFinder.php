@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: artycake
- * Date: 8/18/16
- * Time: 10:38
- */
+
 namespace Jeroenherczeg\Hyena;
 
 use Symfony\Component\DomCrawler\Crawler;
